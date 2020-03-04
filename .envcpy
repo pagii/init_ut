@@ -1,0 +1,8 @@
+DATABASE = "데이터베이스명"
+DB_USER = "아이디"
+DB_PASSWORD = "패스워드"
+DB_HOST = "DB호스트"
+AWS_ACCESS_KEY = "aws엑세스키"
+AWS_SECRET_KEY = "aws보안엑세스키"
+AWS_REGION = "region" 
+AWS_BUCKET = "버킷이름"
