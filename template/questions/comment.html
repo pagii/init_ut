@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- scroll.css -->
+    <link rel="stylesheet" href="../static/css/scroll.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!--bootstrap-toggle-->
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+    <title>U.T.</title>
+
+</head>
+
+<body style="overflow:auto;">
+
+    <!-- 우하단 고정 버튼 -->
+    <div class="btn-group outline" role="group" aria-label="...">
+        <button type="button" class="btn btn-outline-primary"
+            style="position:fixed;bottom:100px;right:30px;margin:0;padding:5px 3px; font-size:30px;" href="#"><a
+                href="./write.html">
+                질문하기</a></button>
+    </div>
+
+    <div id="navbar_container" class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style=" z-index:1">
+
+            <a class="navbar-brand" href="./index2.html">
+                <img src="../../static/img/ut_eng.png" width="80" height="60" class="d-inline-block align-top" alt="">
+                <a style="font-size: 40px">University Teacher</a>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./etc/faq.html">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/question">RESULT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/question/write">질문등록</a>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-dark" style="margin-right: 3px;"><a
+                        href="/account/login">로그인</a></button>
+                <button type="button" class="btn btn-dark"><a href="/account/join">회원가입</a></button>
+            </div>
+        </nav>
+
+        <!-------------------------------------------------------------------------------------------------------->
+        <span id='question_data' style="display:none">{{ question.content_html }}</span>
+
+        <div class="container"><br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <span style="text-align: center; font-size: 20px; height: 100px;"> 교재 : {{ question.book }}</span> 
+                </div>
+                <div class="col-lg-4">
+                    <span style="text-align: center; font-size: 20px; height: 100px;"> 페이지 : {{ question.page }}</span> 
+                </div>
+                <div class="col-lg-4">
+                    <span style="text-align: center; font-size: 20px; height: 100px;"> 전공 : {{ question.major }} </span> 
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>
+                        <hr> {{ question.title }} <!--제목 -->
+                        <hr>
+                    </h1>
+                    <div class="container">
+                        <div class="container" id="question_content" style="width:100%; float: left; height:30%;">
+                        </div>
+                    </div>
+                </div>
+            </div><br><hr>
+
+            <button class="btn btn-primary" id="answerBtn" data-toggle="true">답변 작성</button>
+            
+            <div class="row" style="display:none" id="answerForm">
+                <div class="col-lg-12">
+                    <h2>답변 작성
+                        <hr>
+                        <div class="container">
+                            <!-- 에디터 -->
+                            <div class="container">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        
+                                        <td>
+                                            <textarea name="description" class="form-control"
+                                                id="summernote"></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <button class="btn btn-primary" id="save_btn" style="float: right;">답변 작성하기</button>
+                                <button class="btn btn-primary" id="" style="float: right; margin-right:10px;">모자이크 처리하기</button>
+                            </div>
+                        </div>
+                    </h2><br><br><br><br>
+                </div>
+            </div>
+
+            <br><br><br><br><br><br><br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>답변들</h2>
+                    <hr>
+                    <div class="container" id="answers_container">
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ 
+
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+        <!-------답변 작성 에디터-------->
+        <!-- 스타일관련 -->
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+        <!-- 자바스크립트관련 -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
+        <!-- 한글관련 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/lang/summernote-ko-KR.min.js"></script>
+
+
+
+        <script type="text/javascript">
+            
+            $(document).ready(function () {
+
+                $('#editForm').submit(function () {
+                    $('input[name=files]').remove();
+                });
+
+                $('#summernote').summernote({
+                    lang: 'ko-KR',
+                    height: 300,
+                    callbacks: {
+                        onImageUpload: function (files) {
+                            sendFile(files[0]);
+                        }
+                    }
+                });
+                
+                $("#save_btn").click(function () {
+
+                    var content_html = $(".note-editable").eq(0).html();
+                    var content_text = $(".note-editable").eq(0).text();
+                    var question_pk = $(location).attr("href").split('/').pop()
+                    var param = {
+                        content_html : content_html,
+                        content_text : content_text,
+                        question_pk : question_pk
+                    }
+                    $.ajax({
+                        dataType: 'json',
+                        data: JSON.stringify(param),
+                        type: "POST",
+                        url: '/answer/write',
+                        contentType: 'application/json',
+                        success: function (result) {
+                            console.log(result.answers[0])
+                        },
+                        error:function(err){
+                            console.log(err)
+                        }
+                    
+                    })
+                 
+
+                })
+
+
+                $('#answerBtn').click(function(){
+                    if($(this).data("toggle")=="true"){
+                        console.log("t");
+                        $(this).data("toggle","false")
+                        $(this).removeClass("btn-warning").addClass("btn-primary");
+                        $("#answerForm").css("display","none")
+                    }else{
+                        console.log("f");
+                        $(this).data("toggle","true")
+                        $(this).removeClass("btn-primary").addClass("btn-warning");
+                        $("#answerForm").css("display","")
+                    }
+
+                })
+
+
+
+
+                
+                data2html("#question_data","#question_content")
+
+
+                // html string 변수 받아와서 dom element로 바꾸는 코드 // 
+                function data2html(data_id,html_id){
+                    var data = $(data_id).text();
+                    console.log("Data",typeof data)
+                    var html = $.parseHTML(data)
+                    console.log("html",html)
+                    $(html_id).append(html)
+                }
+
+
+                function sendFile(file, editor, welEditable) {
+                    data = new FormData();
+                    data.append("image", file);
+                    $.ajax({
+                        data: data,
+                        type: "POST",
+                        url: '/question/write/fileupload',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (url) {
+                            $('#summernote').summernote("insertImage", url);
+                        }
+                    });
+                }
+
+                window.myApp = {}
+                myApp = '{{ stringified_answers }}'
+                function htmlDecode(value) {
+                    return $('<div/>').html(value).text();
+                }
+                console.log(htmlDecode(myApp))
+                var answers = (JSON.parse(htmlDecode(myApp)))
+                for(let i in answers){
+
+                    $("#answers_container").append(
+                        '<div class="row" id="answer_'+i+'">'
+                        
+                        +'</div>'
+                        +'<hr>'
+                    )
+                    console.log(typeof answers[i].content_html)
+                    var html = answers[i].content_html
+                    var htmlObject = document.createElement('div');
+                    htmlObject.innerHTML = html;
+                    document.getElementById("answer_"+i).innerHTML = (htmlDecode(html))
+                }
+
+            });
+
+
+           
+
+        </script>
+        
+</body>
+
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="./index2.html">브렉브릭스..?</a>
+        <a> | </a>
+        <a href="./etc/privacy.html">개인정보처리방침</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+</html>

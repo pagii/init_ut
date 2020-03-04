@@ -1,0 +1,240 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- editor setting / bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.js"></script>
+
+    <!-- scroll.css -->
+    <link rel="stylesheet" href="../static/css/scroll.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.1/css/font-awesome.min.css">
+
+    <title>U.T.</title>
+</head>
+
+<body style="overflow: auto;">
+
+    <!-- nav bar -->
+    <div id="navbar_container" class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style=" z-index:1">
+
+            <a class="navbar-brand" href="/">
+                <img src="../../static/img/ut_eng.png" width="80" height="60" class="d-inline-block align-top" alt="">
+                <a style="font-size: 40px">University Teacher</a>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/question">RESULT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/question/write">질문등록</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                        style="margin-right: 10px;">검색</button>
+                </form>
+                <button type="button" class="btn btn-dark" style="margin-right: 3px;"><a
+                        href="/account/login">로그인</a></button>
+                <button type="button" class="btn btn-dark"><a href="/account/join">회원가입</a></button>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <br>
+        <h1>질문 등록</h1>
+        <hr>
+        <div class="input-group input-group-lg">
+            <!--<span class="input-group-addon" id="sizing-addon1">제목</span>-->
+            <input type="text" class="form-control" placeholder="제목을 작성하세요." aria-describedby="sizing-addon1" id="title" name="title">
+            <div class="input-group input-group-lg" style="width: 300px; margin-left: 10px;">
+                <input type="text" class="form-control" placeholder="포인트" aria-describedby="sizing-addon1" id="point">
+            </div>
+        </div><br>
+
+        <div class="container">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="교재를 입력하세요." aria-describedby="sizing-addon1"
+                    style="width:30%; float: left;" id="book"name="">
+                <input type="text" class="form-control" id="page" placeholder="해당 페이지 입력" aria-describedby="sizing-addon1"
+                    style="width:15%; margin-left: 10px;">
+                <!-- Large button group -->
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" 
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 10px;">
+                      분야
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">IT</a>
+                      <a class="dropdown-item" href="#">물리</a>
+                      <a class="dropdown-item" href="#">화학</a>
+                    </div>
+                  </div>
+        </div><br><br>
+        <input type="hidden" id="major">
+
+
+        <!-- 에디터 -->
+        <div class="container">
+            <table class="table table-bordered">
+                <tr>
+                    <th>설명</th>
+                    <td>
+                        <textarea name="description" class="form-control"
+                            id="summernote">{{ product.description }}</textarea>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-primary" id="save_btn">작성하기</button>
+        </div>
+    </div>
+
+
+    <!--------------------------------------------------------------------------------------------------------------------->
+    <!-- 스타일관련 -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+    <!-- 자바스크립트관련 -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
+    <!-- 한글관련 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/lang/summernote-ko-KR.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#editForm').submit(function () {
+                $('input[name=files]').remove();
+            });
+
+            $('#summernote').summernote({
+                lang: 'ko-KR',
+                height: 300,
+                callbacks: {
+                    onImageUpload: function (files) {
+                        sendFile(files[0]);
+                    }
+                }
+            });
+
+            $("#save_btn").click(function(){
+               
+                //question table에 저장
+                var question = new FormData();
+                var title = $("#title").val();
+                var point = $("#point").val();
+                var book = $("#book").val();
+                var page = $("#page").val();
+                var major = $("#major").val();
+
+                //note-editable은 summernote js가 만드는 클래스
+                var content_html = $(".note-editable").eq(0).html();
+                var content_text = $(".note-editable").eq(0).text();
+                console.log("content_text",content_text)
+                console.log("content_html",content_html)
+                var param = {
+                    title : title
+                    ,point : point
+                    ,book : book
+                    ,page : page
+                    ,major : major
+                    ,content_html : content_html
+                    ,content_text : content_text
+                }
+                
+                
+
+                $.ajax({
+                    dataType: 'json',
+                    data: JSON.stringify(param),
+                    type: "POST",
+                    url: '/question/write',
+                    contentType: 'application/json',
+                    success: function (result) {
+                       console.log(result);
+                       if(result.success == 0){
+                            alert("에러");
+                            location.href="/account/login";
+                       }else{
+                           alert("질문 작성 완료");
+                           location.href="/question/detail/"+result.id;
+                       }
+                       
+                    },
+                    error:function(result){
+                        console.log(result)
+                    }
+                    
+                })
+
+            })
+
+
+            $('.dropdown-menu a').on('click', function(){
+                $('#major').val($(this).text());
+                $("#dropdownMenuButton").text($(this).text());
+            });
+
+            function sendFile(file, editor, welEditable) {
+                data = new FormData();
+                data.append("image", file);
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: '/question/write/fileupload',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (url) {
+                        $('#summernote').summernote("insertImage", url);
+                    }
+                });
+            }
+        });
+
+
+    </script>
+</body>
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="./index2.html">브렉브릭스..?</a>
+        <a> | </a>
+        <a href="./etc/privacy.html">개인정보처리방침</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</html>

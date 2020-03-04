@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- scroll.css -->
+  <link rel="stylesheet" href="../static/css/scroll.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+
+  <!-- font-awesome -->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <title>U.T.</title>
+
+</head>
+
+<body>
+  <!-- 우하단 고정 버튼 -->
+  <div class="btn-group outline" role="group" aria-label="...">
+    <button type="button" class="btn btn-outline-primary"
+      style="position:fixed;bottom:100px;right:30px;margin:0;padding:5px 3px; font-size:30px;" href="#"><a
+        href="/question/write">
+        질문하기</a></button>
+  </div>
+
+  <div id="navbar_container" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style=" z-index:1">
+
+      <a class="navbar-brand" href="/">
+        <img src="../../static/img/ut_eng.png" width="80" height="60" class="d-inline-block align-top" alt="">
+        <a style="font-size: 40px">University Teacher</a>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <!--
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                    </li>
+                    -->
+          <li class="nav-item">
+            <a class="nav-link" href="./etc/faq.html">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/question">RESULT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/question/write">질문등록</a>
+          </li>
+
+        </ul>
+
+        <button type="button" class="btn btn-dark" style="margin-right: 3px;"><a href="/account/login">로그인</a></button>
+        <button type="button" class="btn btn-dark"><a href="/account/join">회원가입</a></button>
+      </div>
+    </nav>
+  </div>
+
+
+  <div id="card_container" class="container">
+    {% for question in questions %}
+    <div class="row" style="margin-top:3vh;margin-bottom:2vh">
+      {# <div class="col-md-10 col-md-offset-1"> #}
+      <div class="card mb-3 question" style="width: 100%;cursor:pointer">
+        <span id='question_id' style="display:none">{{ question.pk }}</span>
+        {# style="max-width: 540px; #}
+        <div class="card-header">
+          <h5 class="inline-block-child">{{question.title}} </h5>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-lg-4">
+            <img src="../static/img/temp.PNG" class="card-img" alt="..." style="width:10vw;height:10vw">
+          </div>
+          <div class="col-lg-8">
+            <div class="card-body">
+
+              <p class="card_etc">
+                교재명:&nbsp;&nbsp;&nbsp;{{question.book}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;저자:&nbsp;&nbsp;&nbsp;{{question.writer}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;페이지:&nbsp;{{question.page}}
+              </p>
+              <p class="card_etc">
+                조회수:&nbsp;&nbsp;&nbsp;&nbsp;view_num&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;답변개수:&nbsp;&nbsp;&nbsp;answer_num
+              </p>
+              <p class="point">포인트:&nbsp;&nbsp;&nbsp;{{question.point}}</p>
+              <p class="point">질문자:&nbsp;&nbsp;&nbsp;{{question.questioner}}</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {# </div> #}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="paginate_container" class="container">
+    <div class="row">
+      <nav>
+        <ul class="pagination">
+          {% if paginate.hasPreviousPages %}
+          <li class="page-item">
+            <a class="page-link" href="{{ paginate.href(true) }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% for page in pages %}
+          <li class="page-item" "{% if paginate.page == page.number %} active {% endif %}">
+            <a class="page-link" href="{{ page.url }}">{{ page.number }} </a>
+          </li>
+          {% endfor %}
+
+          {% if paginate.hasNextPages( pageCount ) %}
+          <li class="page-item">
+            <a class="page-link" href="{{ paginate.href() }}">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".question").click(function(){
+        //console.log('$(this) :',$(this));
+        var id = $(this).find('#question_id').text();
+        console.log(id)
+        location.href = "/question/detail/"+id
+      })
+    })
+
+  </script>
+</body>
+
+</html>

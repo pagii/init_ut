@@ -1,0 +1,103 @@
+.layer {
+   position: inherit;
+   top: 0;
+   left: 0;
+   width: 100%;
+   text-align: center
+}
+
+.layer .content {
+   display: inline-block;
+   background: beige;
+   vertical-align: middle
+}
+
+.layer:before {
+   content: '';
+   display: inline-block;
+   width: 0;
+   height: 100%;
+   vertical-align: middle;
+   margin-right: -4px;
+}
+
+#mydiv1 {
+   position: absolute;
+   z-index: 9;
+   background-color: #f1f1f1;
+   border: 1px solid #d3d3d3;
+   text-align: center;
+ }
+ #mydiv2 {
+   position: absolute;
+   z-index: 9;
+   background-color: #f1f1f1;
+   border: 1px solid #d3d3d3;
+   text-align: center;
+ }
+ #mydiv3 {
+   position: absolute;
+   z-index: 9;
+   background-color: #f1f1f1;
+   border: 1px solid #d3d3d3;
+   text-align: center;
+ }
+ #mydiv4 {
+   position: absolute;
+   z-index: 9;
+   background-color: #f1f1f1;
+   border: 1px solid #d3d3d3;
+   text-align: center;
+ }
+ #mydiv5 {
+   position: absolute;
+   z-index: 9;
+   background-color: #f1f1f1;
+   border: 1px solid #d3d3d3;
+   text-align: center;
+ }
+
+ 
+ #mydivheader1{
+   padding: 10px;
+   cursor: move;
+   z-index: 10;
+   background-color: #2196F3;
+   color: #fff;
+ }
+
+
+ #mydivheader2{
+   padding: 10px;
+   cursor: move;
+   z-index: 10;
+   background-color: #2196F3;
+   color: #fff;
+ }
+ #mydivheader3{
+   padding: 10px;
+   cursor: move;
+   z-index: 10;
+   background-color: #2196F3;
+   color: #fff;
+ }
+ #mydivheader4{
+   padding: 10px;
+   cursor: move;
+   z-index: 10;
+   background-color: #2196F3;
+   color: #fff;
+ }
+ #mydivheader5{
+   padding: 10px;
+   cursor: move;
+   z-index: 10;
+   background-color: #2196F3;
+   color: #fff;
+ }
+
+
+ .rect{
+    width: 300px;
+    height: 80px;
+ }
